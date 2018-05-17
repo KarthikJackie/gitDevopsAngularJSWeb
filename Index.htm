@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="devopsangularjs">
+<head>
+<title>Demo Devops for AngularJs</title>
+<script src="scripts/angularJs/angular.min.js"></script>
+<script src="scripts/model/ModelAngularJs.js"></script>
+<script src="scripts/controller/ControllerAngularJs.js"></script>
+<style>
+.tabstyle
+{
+    border: 1px solid black;
+}
+</style>
+</head>
+<body ng-controller="ctrl_devopsangularjs">
+<div ng-show="addrecords">
+<table>
+<tr>
+<td><label>First Name</label></td>
+<td><input type="text" ng-model="txtFirstname"/></td>
+</tr>
+<tr>
+<td><label>Last Name</label></td>
+<td><input type="text" ng-model="txtLastname"/></td>
+</tr>
+<tr>
+<td><label>Age</label></td>
+<td><input type="text" ng-model="txtAge"/></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><input type="submit" value="Save" style="float:right;" ng-click="AddNewRecords()"/></td>
+<td><input type="submit" style="float:left;" value="View Records" ng-click="ViewRecords()"/></td>
+</tr>
+</table>
+</div>
+<div ng-show="viewrecords">
+<table class="tabstyle">
+<tr>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Age</th>
+</tr>
+<tr ng-repeat="stu in TotalRecords">
+<td>{{stu.FIRSTNAME}}</td>
+<td>{{stu.LASTNAME}}</td>
+<td>{{stu.AGE}}</td>
+</tr>
+</table>
+<input type="submit" value="Add Records" ng-click="ShowAddNew()"/>
+</div>
+</body>
+</html>
