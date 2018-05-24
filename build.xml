@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Angular" default="export">
+<project name="Angular_AntExample" default="export">
     <property name="root" value="./WebContent" />
-    <property name="appname" value="Angular" />
+    <property name="appname" value="Angular_AntExample" />
     <target name="mkfolders">
-		<mkdir dir="${root}/scripts" />
+    <mkdir dir="${root}/dist" />  
+		<mkdir dir="${root}/scripts/angularJs" />
+    <mkdir dir="${root}/scripts/model" />
+    <mkdir dir="${root}/scripts/controller" />    
         <!-- <mkdir dir="${root}/js" /> -->
         <!-- <mkdir dir="${root}/css" /> -->
         <!-- <mkdir dir="${root}/img" /> -->
@@ -14,6 +17,7 @@
 		<touch file="${root}/scripts/angularJs/angular.min.js" />
         <touch file="${root}/scripts/model/ModelAngularJs.js" />
         <touch file="${root}/scripts/controller/ControllerAngularJs.js" />
+        <touch file="${root}/Index.htm" />
         <!-- <touch file="${root}/js/app.js" /> -->
         <!-- <touch file="${root}/js/controller.js" /> -->
         <!-- <touch file="${root}/js/directives.js" /> -->
@@ -24,123 +28,20 @@
      
     <target name="basicContent">
 		<echo file="${root}/Index.htm" append="false">
-        <![CDATA[
-            <!DOCTYPE html>
-<html ng-app="devopsangularjs">
-<head>
-<title>Demo Devops for AngularJs</title>
-<script src="scripts/angularJs/angular.min.js"></script>
-<script src="scripts/model/ModelAngularJs.js"></script>
-<script src="scripts/controller/ControllerAngularJs.js"></script>
-<style>
-.tabstyle
-{
-    border: 1px solid black;
-}
-</style>
-</head>
-<body ng-controller="ctrl_devopsangularjs">
-<div ng-show="addrecords">
-<table>
-<tr>
-<td><label>First Name</label></td>
-<td><input type="text" ng-model="txtFirstname"/></td>
-</tr>
-<tr>
-<td><label>Last Name</label></td>
-<td><input type="text" ng-model="txtLastname"/></td>
-</tr>
-<tr>
-<td><label>Age</label></td>
-<td><input type="text" ng-model="txtAge"/></td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td><input type="submit" value="Save" style="float:right;" ng-click="AddNewRecords()"/></td>
-<td><input type="submit" style="float:left;" value="View Records" ng-click="ViewRecords()"/></td>
-</tr>
-</table>
-</div>
-<div ng-show="viewrecords">
-<table class="tabstyle">
-<tr>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Age</th>
-</tr>
-<tr ng-repeat="stu in TotalRecords">
-<td>{{stu.FIRSTNAME}}</td>
-<td>{{stu.LASTNAME}}</td>
-<td>{{stu.AGE}}</td>
-</tr>
-</table>
-<input type="submit" value="Add Records" ng-click="ShowAddNew()"/>
-</div>
-</body>
-</html>
-        ]]>
-        </echo>
-        <echo file="${root}/scripts/model/ModelAngularJs.js" append="false">
-        <![CDATA[
-            var app=angular.module("devopsangularjs",[]);
-        ]]>
-        </echo>
+      <![CDATA[
+          <!DOCTYPE html><html ng-app="devopsangularjs"><head><title>Demo Devops for AngularJs</title><script src="scripts/angularJs/angular.min.js"></script><script src="scripts/model/ModelAngularJs.js"></script><script src="scripts/controller/ControllerAngularJs.js"></script><style>.tabstyle{    border: 1px solid black;}</style></head><body ng-controller="ctrl_devopsangularjs"><div ng-show="addrecords"><table><tr><td><label>First Name</label></td><td><input type="text" ng-model="txtFirstname"/></td></tr><tr><td><label>Last Name</label></td><td><input type="text" ng-model="txtLastname"/></td></tr><tr><td><label>Age</label></td><td><input type="text" ng-model="txtAge"/></td></tr><tr><td>&nbsp;</td><td><input type="submit" value="Save" style="float:right;" ng-click="AddNewRecords()"/></td><td><input type="submit" style="float:left;" value="View Records" ng-click="ViewRecords()"/></td></tr></table></div><div ng-show="viewrecords"><table class="tabstyle"><tr><th>First Name</th><th>Last Name</th><th>Age</th></tr><tr ng-repeat="stu in TotalRecords"><td>{{stu.FIRSTNAME}}</td><td>{{stu.LASTNAME}}</td><td>{{stu.AGE}}</td></tr></table><input type="submit" value="Add Records" ng-click="ShowAddNew()"/></div></body></html>
+      ]]>
+    </echo>
+    <echo file="${root}/scripts/model/ModelAngularJs.js" append="false">
+      <![CDATA[
+          var app=angular.module("devopsangularjs",[]);
+      ]]>
+    </echo>
 		<echo file="${root}/scripts/controller/ControllerAngularJs.js" append="false">
-        <![CDATA[
-            app.controller("ctrl_devopsangularjs",function($scope){
-	var studentRecords=null;
-	$scope.txtFirstname=null;
-	$scope.txtLastname=null;
-	$scope.txtAge=null;
-	
-	$scope.addrecords=true;
-	$scope.viewrecords=false;
-	
-	$scope.AddNewRecords=function(){
-		debugger;
-		if($scope.txtFirstname!=undefined && $scope.txtLastname!=undefined && $scope.txtAge!=undefined)
-		{
-			studentRecords=[{
-				FIRSTNAME:$scope.txtFirstname,
-				LASTNAME:$scope.txtLastname,
-				AGE:$scope.txtAge
-			}];
-			alert("Saved Succfully");
-			$scope.txtFirstname=null;
-			$scope.txtLastname=null;
-			$scope.txtAge=null;
-		}
-		else
-		{
-			alert("Please enter all details");
-		}		
-	}
-	
-	$scope.ViewRecords=function(){
-		debugger;		
-		if(studentRecords.length>0){
-			$scope.addrecords=false;
-			$scope.viewrecords=true;
-			$scope.TotalRecords=studentRecords;
-			
-		}
-		else{
-			studentRecords=null;
-			$scope.addrecords=true;
-			$scope.viewrecords=false;
-		}
-	}
-	
-	$scope.ShowAddNew=function(){
-		debugger;
-		studentRecords=null;
-		$scope.addrecords=true;
-		$scope.viewrecords=false;
-	}
-	
-});
-        ]]>
-        </echo>
+      <![CDATA[
+          app.controller("ctrl_devopsangularjs",function($scope){	var studentRecords=null;	$scope.txtFirstname=null;	$scope.txtLastname=null;	$scope.txtAge=null;		$scope.addrecords=true;	$scope.viewrecords=false;		$scope.AddNewRecords=function(){		if($scope.txtFirstname!=undefined && $scope.txtLastname!=undefined && $scope.txtAge!=undefined)		{			studentRecords=[{				FIRSTNAME:$scope.txtFirstname,				LASTNAME:$scope.txtLastname,				AGE:$scope.txtAge			}];			alert("Saved Succfully");			$scope.txtFirstname=null;			$scope.txtLastname=null;			$scope.txtAge=null;		}		else		{			alert("Please enter all details");		}			}		$scope.ViewRecords=function(){		if(studentRecords.length>0){			$scope.addrecords=false;			$scope.viewrecords=true;			$scope.TotalRecords=studentRecords;			}		else{			studentRecords=null;			$scope.addrecords=true;			$scope.viewrecords=false;		}	}		$scope.ShowAddNew=function(){		studentRecords=null;		$scope.addrecords=true;		$scope.viewrecords=false;	}	});
+      ]]>
+    </echo>
         <!-- <echo file="${root}/index.html" append="false"> -->
         <!-- <![CDATA[ -->
             <!-- <html><head><scriptsrc="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script><scriptsrc="https://code.angularjs.org/1.2.23/angular-route.js"></script></head><body><div ng-app="myapp"><script type="text/ng-template" id="template.html"><p>hello</p></script><script type="ng-template/text" id="partials/mypar.html"><div id="yo">yoyomama</div></script><div ng-controller="mycontroller as cont"><p>{{name}}</p><div ng-view></div></div></div><script src="/Angular/js/app.js"></script></body></html> -->
@@ -152,16 +53,24 @@
         <!-- ]]> -->
         <!-- </echo> -->
     </target>
+  <target name="clean">
+    <delete target="mkfolders" />
+    <delete target="mkfiles" />
+    <delete target="basicContent" />
+  </target>
     <target name="build">
         <antcall target="mkfolders" />
         <antcall target="mkfiles" />
         <antcall target="basicContent" />
     </target>
-    <!-- <target name="export"> -->
-        <!-- <delete dir="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}" /> -->
-        <!-- <delete file="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}.war" /> -->
-        <!-- <war destfile="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}.war" webxml="WebContent/WEB-INF/web.xml"> -->
-            <!-- <fileset dir="WebContent" /> -->
-        <!-- </war> -->
-    <!-- </target> -->
+     <target name="export"> 
+         <!--<delete dir="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}" /> 
+         <delete file="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}.war" /> 
+         <war destfile="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}.war" webxml="WebContent/WEB-INF/web.xml"> 
+             <fileset dir="WebContent" /> 
+         </war>-->
+       <war destfile="${root}/dist/${appname}.war" webxml="WebContent/WEB-INF/web.xml">
+         <fileset dir="WebContent" />
+       </war>
+       </target> 
 </project>
