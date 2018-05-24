@@ -4,7 +4,7 @@
     <property name="appname" value="Angular_AntExample" />
     <target name="mkfolders">
     <mkdir dir="${root}/dist" />  
-		<mkdir dir="${root}/scripts/angularJs" />
+    <mkdir dir="${root}/scripts/angularJs" />
     <mkdir dir="${root}/scripts/model" />
     <mkdir dir="${root}/scripts/controller" />    
         <!-- <mkdir dir="${root}/js" /> -->
@@ -14,7 +14,7 @@
         <!-- <mkdir dir="${root}/partials" /> -->
     </target>
     <target name="mkfiles">
-		<touch file="${root}/scripts/angularJs/angular.min.js" />
+	<touch file="${root}/scripts/angularJs/angular.min.js" />
         <touch file="${root}/scripts/model/ModelAngularJs.js" />
         <touch file="${root}/scripts/controller/ControllerAngularJs.js" />
         <touch file="${root}/Index.htm" />
@@ -27,7 +27,7 @@
     </target>
      
     <target name="basicContent">
-		<echo file="${root}/Index.htm" append="false">
+    <echo file="${root}/Index.htm" append="false">
       <![CDATA[
           <!DOCTYPE html><html ng-app="devopsangularjs"><head><title>Demo Devops for AngularJs</title><script src="scripts/angularJs/angular.min.js"></script><script src="scripts/model/ModelAngularJs.js"></script><script src="scripts/controller/ControllerAngularJs.js"></script><style>.tabstyle{    border: 1px solid black;}</style></head><body ng-controller="ctrl_devopsangularjs"><div ng-show="addrecords"><table><tr><td><label>First Name</label></td><td><input type="text" ng-model="txtFirstname"/></td></tr><tr><td><label>Last Name</label></td><td><input type="text" ng-model="txtLastname"/></td></tr><tr><td><label>Age</label></td><td><input type="text" ng-model="txtAge"/></td></tr><tr><td>&nbsp;</td><td><input type="submit" value="Save" style="float:right;" ng-click="AddNewRecords()"/></td><td><input type="submit" style="float:left;" value="View Records" ng-click="ViewRecords()"/></td></tr></table></div><div ng-show="viewrecords"><table class="tabstyle"><tr><th>First Name</th><th>Last Name</th><th>Age</th></tr><tr ng-repeat="stu in TotalRecords"><td>{{stu.FIRSTNAME}}</td><td>{{stu.LASTNAME}}</td><td>{{stu.AGE}}</td></tr></table><input type="submit" value="Add Records" ng-click="ShowAddNew()"/></div></body></html>
       ]]>
@@ -37,7 +37,7 @@
           var app=angular.module("devopsangularjs",[]);
       ]]>
     </echo>
-		<echo file="${root}/scripts/controller/ControllerAngularJs.js" append="false">
+    <echo file="${root}/scripts/controller/ControllerAngularJs.js" append="false">
       <![CDATA[
           app.controller("ctrl_devopsangularjs",function($scope){	var studentRecords=null;	$scope.txtFirstname=null;	$scope.txtLastname=null;	$scope.txtAge=null;		$scope.addrecords=true;	$scope.viewrecords=false;		$scope.AddNewRecords=function(){		if($scope.txtFirstname!=undefined && $scope.txtLastname!=undefined && $scope.txtAge!=undefined)		{			studentRecords=[{				FIRSTNAME:$scope.txtFirstname,				LASTNAME:$scope.txtLastname,				AGE:$scope.txtAge			}];			alert("Saved Succfully");			$scope.txtFirstname=null;			$scope.txtLastname=null;			$scope.txtAge=null;		}		else		{			alert("Please enter all details");		}			}		$scope.ViewRecords=function(){		if(studentRecords.length>0){			$scope.addrecords=false;			$scope.viewrecords=true;			$scope.TotalRecords=studentRecords;			}		else{			studentRecords=null;			$scope.addrecords=true;			$scope.viewrecords=false;		}	}		$scope.ShowAddNew=function(){		studentRecords=null;		$scope.addrecords=true;		$scope.viewrecords=false;	}	});
       ]]>
