@@ -76,15 +76,17 @@
     <delete target="mkfiles" />
     <delete target="basicContent" />
     <delete target="publishfolders"/>
+    <echo message="Clean Successfull"/>
   </target>
 <!-- Clean all the files & folders in the directory of PublishWebContent-->
 
 <!-- Build and Export all the folder files & war files in the directory of PublishWebContent-->
-    <target name="build">
+    <target name="build" depends="clean">
         <antcall target="publishfolders"/>
         <antcall target="mkfolders" />
         <antcall target="mkfiles" />
         <antcall target="basicContent" />
+	<echo message="Build Successfull"/>
     </target>
      <target name="export" depends="build">
          <!--<delete dir="C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps\${appname}" /> 
@@ -95,6 +97,7 @@
        <war destfile="${root}/dist/${appname}.war" webxml="PublishWebContent/WEB-INF/web.xml">
          <fileset dir="PublishWebContent" />
        </war>
+	<echo message="Export Successfull"/>
        </target>
 <!-- Build and Export all the folder files & war files in the directory of PublishWebContent-->
 </project>
